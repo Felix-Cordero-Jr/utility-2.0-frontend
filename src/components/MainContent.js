@@ -1,61 +1,49 @@
 import React from 'react';
-import { Grid, Card, CardContent, Typography, ButtonBase, ListItemIcon } from '@mui/material';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import BusinessIcon from '@mui/icons-material/Business'; // Represents "Clients"
-import ArchiveIcon from '@mui/icons-material/Archive';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import FolderIcon from '@mui/icons-material/Folder';
-import PeopleIcon from '@mui/icons-material/People';
+import { Grid, Card, CardContent, Typography, ListItemIcon, ButtonBase } from '@mui/material';
 import TaskIcon from '@mui/icons-material/Assignment';
-import TemplateIcon from '@mui/icons-material/Description'; // Example for templates
+import PeopleIcon from '@mui/icons-material/People';
+import FolderIcon from '@mui/icons-material/Folder';
+import BusinessIcon from '@mui/icons-material/Business';
 import AddIcon from '@mui/icons-material/Add';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
-const MainContent = ({ selectedMenu, onCardClick }) => {
-  // Icon mapping for menu items
-  const icons = {
-    'Inquiries': <TaskIcon />,
-    'Tasks': <TaskIcon />,
-    'Clients\' Progress': <PeopleIcon />,
-    'Prospects': <BusinessIcon />,
-    'Add Client': <AddIcon />,
-    'Forms': <FormatListBulletedIcon />,
-    'Templates': <TemplateIcon />,
-    'Create a Template': <AddIcon />,
-    'File Manager': <FolderIcon />,
-    'Archives': <ArchiveIcon />,
-    'Users': <PeopleIcon />,
-    'Dashboard': <DashboardIcon />
+const MainContent = ({ selectedMenu }) => {
+  const navigate = useNavigate();
+
+  // Menu items for the dashboard
+  const dashboardItems = [
+    { title: 'Inquiries', icon: <TaskIcon />, path: '/inquiries' },
+    { title: 'Tasks', icon: <TaskIcon />, path: '/tasks' },
+    { title: "Clients' Progress", icon: <PeopleIcon />, path: '/clients-progress' },
+    { title: 'Prospects', icon: <BusinessIcon />, path: '/prospects' },
+    { title: 'Add Client', icon: <AddIcon />, path: '/add-client' },
+    { title: 'Templates', icon: <TaskIcon />, path: '/templates' },
+    { title: 'Create a Template', icon: <AddIcon />, path: '/create-template' },
+    { title: 'File Manager', icon: <FolderIcon />, path: '/file-manager' },
+    { title: 'Archives - Companies', icon: <ArchiveIcon />, path: '/archives-companies' },
+    { title: 'Archives - Forms or Templates', icon: <ArchiveIcon />, path: '/forms-or-templates' },
+    { title: 'Users - Add a Company', icon: <PeopleIcon />, path: '/add-company' },
+    { title: 'Users - Add a User', icon: <PeopleIcon />, path: '/add-user' },
+  ];
+
+  const menuItems = selectedMenu === 'Dashboard' ? dashboardItems : [];
+
+  const handleCardClick = (path) => {
+    navigate(path);
   };
-
-  // Menu items for the dashboard or the selected menu
-  const menuItems = selectedMenu === 'Dashboard' ? [
-    'Inquiries',
-    'Tasks',
-    'Clients\' Progress',
-    'Prospects',
-    'Add Client',
-    'Forms',
-    'Templates',
-    'Create a Template',
-    'File Manager',
-    'Archives',
-    'Users'
-  ] : [selectedMenu];
 
   return (
     <Grid container spacing={3}>
       {menuItems.map((item, index) => (
         <Grid item xs={12} sm={6} md={4} key={index}>
-          <ButtonBase 
-            sx={{ width: '100%' }} 
-            onClick={() => onCardClick(item)} // Trigger onCardClick with the item name
-          >
-            <Card sx={{ minHeight: 150, width: '100%' }}>
+          <ButtonBase sx={{ width: '100%' }} onClick={() => handleCardClick(item.path)}>
+            <Card sx={{ minHeight: 120, width: '100%' }}>
               <CardContent>
                 <ListItemIcon sx={{ mb: 1 }}>
-                  {icons[item]} {/* Display the icon associated with the item */}
+                  {item.icon}
                 </ListItemIcon>
-                <Typography variant="h6">{item}</Typography>
+                <Typography variant="h6">{item.title}</Typography>
               </CardContent>
             </Card>
           </ButtonBase>
