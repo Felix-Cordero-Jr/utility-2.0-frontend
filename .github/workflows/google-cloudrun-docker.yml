@@ -36,7 +36,7 @@ on:
 
 env:
   PROJECT_ID: 'utility-2-436700' # TODO: update to your Google Cloud project ID
-  REGION: 'us-west1' # TODO: update to your region
+  REGION: 'global' # TODO: update to your region
   SERVICE: 'Utility 2' # TODO: update to your service name
   WORKLOAD_IDENTITY_PROVIDER: 'projects/1082862706643/locations/global/workloadIdentityPools/my-pool/providers/my-provider' # TODO: update to your workload identity provider
 
