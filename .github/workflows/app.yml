@@ -1,7 +1,0 @@
-service: default  # This ensures that this is the default service
-runtime: nodejs18  # Set the runtime based on your application (e.g., nodejs, python)
-entrypoint: npm start  # Replace with the correct entrypoint command for your app
-
-handlers:
-- url: /.*
-  script: auto
