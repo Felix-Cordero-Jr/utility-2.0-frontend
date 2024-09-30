@@ -1,0 +1,16 @@
+# Exported from Render on 2024-09-30T08:01:29Z
+services:
+- type: web
+  name: utility-2.0-frontend
+  runtime: node
+  repo: https://github.com/Felix-Cordero-Jr/utility-2.0-frontend
+  plan: free
+  envVars:
+  - key: NODE_ENV
+    sync: false
+  region: oregon
+  buildCommand: npm run build
+  startCommand: npm start
+  previews:
+    generation: automatic
+version: "1"
